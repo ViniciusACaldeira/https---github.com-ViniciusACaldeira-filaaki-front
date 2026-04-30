@@ -43,7 +43,14 @@ export async function login( email, senha )
     },
     body: JSON.stringify({ email, senha })
   });
-  return res.json();
+  
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data?.message || "Erro no login");
+  }
+
+  return data;
 } 
 
 export async function getFilaAtual( token )
@@ -54,6 +61,23 @@ export async function getFilaAtual( token )
   });
 
   return res.json();
+}
+
+export async function cadastrarEmpresa( data )
+{
+  const res = await fetch(`${API_URL}/empresa`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify( data )
+  });
+
+  const ret = await res.json();
+
+  if (!res.ok) {
+    throw new Error(ret?.erro || "Erro no cadastro");
+  }
+
+  return ret;
 }
 
 /* APIS Privadas */

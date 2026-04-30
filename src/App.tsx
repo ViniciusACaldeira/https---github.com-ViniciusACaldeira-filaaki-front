@@ -11,7 +11,9 @@ import NovaFila from "./pages/fila/novaFila/NovaFila";
 import Relatorio from "./pages/relatorio/Relatorio";
 import Configuracao from "./pages/configuracao/Configuracao";
 import DashboardPage from "./pages/dashboard/DashboardPage";
+import Registrar from "./pages/registro/Registrar";
 import { AuthProvider } from "./context/AuthProvider";
+import { Toaster } from "./components/ui/sonner.js";
 
 export function App() {
   return (
@@ -19,6 +21,7 @@ export function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/registrar" element={<Registrar />} />
           <Route path="/" element={<Home />} />
           <Route path="/c/:sala" element={<Cliente />} />
           <Route path="/v/:token" element={<Visualizador />} />
@@ -37,6 +40,7 @@ export function App() {
           <Route path="/teste" element={<Teste />} />
         </Routes>
       </BrowserRouter>
+      <Toaster />
     </AuthProvider>
   )
 }
