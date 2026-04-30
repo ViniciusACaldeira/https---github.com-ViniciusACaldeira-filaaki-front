@@ -70,7 +70,7 @@ export default function Navbar() {
             <DropdownMenuSeparator />
 
             <DropdownMenuItem
-              onClick={() => navigate("/perfil")}
+              /*onClick={() => navigate("/perfil")}*/
               className="gap-2 cursor-pointer"
             >
               <User size={16} />
