@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./login.module.css";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/api";
+import { useAuth } from "../../context/AuthProvider";
 
 export default function Login( )
 {
-    localStorage.removeItem("filaaki_token");
-    localStorage.removeItem("filaaki_usuario");
-    
+  const context = useAuth( );
+
+  useEffect(() => {
+    context.logout();
+  }, []);
+
   const [email, setEmail] = useState("joao@email.com");
   const [senha, setSenha] = useState("123456");
   const [erro, setErro] = useState("");
@@ -22,11 +26,8 @@ export default function Login( )
 
       const { token, usuario } = response;
 
-      // salva o token
-      localStorage.setItem("filaaki_token", token);
-      localStorage.setItem("filaaki_usuario", JSON.stringify(usuario));
+      context.login(token, usuario);
 
-      // redireciona
       navigate("/d");
     } catch (err) {
       setErro("Email ou senha inválidos");
