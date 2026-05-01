@@ -1,15 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import { chamarProximo } from "@/services/api";
+import { toast } from "sonner";
 
 export default function Chamar( {fila} )
 {
     function cProximo( )
     {
         chamarProximo( fila ).then(() => {
-            alert("Próximo chamado!");
-        }).catch(() => {
-            alert("Erro ao chamar próximo!");
+            toast.success("Próximo chamado!");
+        }).catch(( e ) => {
+            toast.error( e.erro ?? "Erro ao chamar próximo!");
         });
     }
 

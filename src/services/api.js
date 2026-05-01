@@ -2,10 +2,8 @@ import axios from "axios";
 
 const API_URL = "http://192.168.1.16:3000"
 
-
-
-export async function getFila(identificador) {
-  const res = await fetch(`${API_URL}/fila/${identificador}`)
+export async function getFila(empresa, fila) {
+  const res = await fetch(`${API_URL}/fila/${empresa}/${fila}`)
   return res.json()
 }
 
@@ -105,7 +103,26 @@ export async function getFilas( )
 
 export async function chamarProximo( codigo )
 {
-  console.log("Chamando próximo da fila:", codigo);
-  const res = await api.post(`/senha/chamar`, { identificador: codigo });
-  return res.data;
+  try
+  {
+    const res = await api.post(`/senha/chamar`, { identificador: codigo });
+    return res.data;
+  }
+  catch( error )
+  {
+    throw new Error( error.response?.data?.erro || error.message );
+  }
+}
+
+export async function cadastrarFila( data )
+{
+  try
+  {
+    const res = await api.post(`fila`, data );
+    return res.data;
+  }
+  catch( error )
+  {
+    throw new Error( error.response?.data?.erro || error.message );
+  }
 }

@@ -13,18 +13,19 @@ export default function SelectFila( )
             if( data.length > 0 )
             {
                 setFilas( data );
-                setFila( data[0].codigo );
+                setFila( data[0] );
             }
         });
     }, [] );
 
     function onChangeFila( value )
     {
-        setFila( value );
+        const filaSelecionada = filas.find(f => f.codigo === value);
+        setFila(filaSelecionada);
     }
 
     return (
-        <Select value={fila} onValueChange={onChangeFila}>
+        <Select value={fila?.codigo} onValueChange={onChangeFila}>
             <SelectTrigger className="w-full">
                 <SelectValue placeholder="Selecione a fila" />
             </SelectTrigger>

@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 const audio = new Audio("/assets/chamada.mp3");
 
 export default function Cliente() {
-  const { sala } = useParams();
+  const { empresa, slugFila } = useParams();
 
   const [fila, setFila] = useState(null);
   const [senha, setSenha] = useState(null);
@@ -20,7 +20,8 @@ export default function Cliente() {
 
   useEffect(() => {
     async function init() {
-      const data = await getFila(sala);
+      console.log( empresa, slugFila );
+      const data = await getFila(empresa, slugFila);
 
       if (data.erro) {
         setMensagem(data.erro);
@@ -38,7 +39,7 @@ export default function Cliente() {
     }
 
     init();
-  }, [sala]);
+  }, [slugFila]);
 
   async function pegarSenha(tipo) {
     try {
@@ -48,7 +49,8 @@ export default function Cliente() {
     } catch {}
 
     const res = await entrarNaFila({
-      identificador: sala,
+      empresa: empresa,
+      slugFila: slugFila,
       tipo
     });
 

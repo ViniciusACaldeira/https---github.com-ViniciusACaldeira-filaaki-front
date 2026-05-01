@@ -14,33 +14,36 @@ import DashboardPage from "./pages/dashboard/DashboardPage";
 import Registrar from "./pages/registro/Registrar";
 import { AuthProvider } from "./context/AuthProvider";
 import { Toaster } from "./components/ui/sonner.js";
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 export function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/registrar" element={<Registrar />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/c/:sala" element={<Cliente />} />
-          <Route path="/v/:token" element={<Visualizador />} />
+      <TooltipProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/registrar" element={<Registrar />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/c/:empresa/:slugFila" element={<Cliente />} />
+              <Route path="/v/:token" element={<Visualizador />} />
 
-          <Route path="/d" element={<PrivateRoute>
-                                              <Dashboard />
-                                            </PrivateRoute>}>   
+              <Route path="/d" element={<PrivateRoute>
+                                                  <Dashboard />
+                                                </PrivateRoute>}>   
 
-            <Route index element={<DashboardPage />} />
-            <Route path="fila" element={<Fila />} />
-            <Route path="fila/nova" element={<NovaFila />} />
-            <Route path="relatorio" element={<Relatorio />} />
-            <Route path="configuracao" element={<Configuracao />} />
-          </Route>
+                <Route index element={<DashboardPage />} />
+                <Route path="fila" element={<Fila />} />
+                <Route path="fila/nova" element={<NovaFila />} />
+                <Route path="relatorio" element={<Relatorio />} />
+                <Route path="configuracao" element={<Configuracao />} />
+              </Route>
 
-          <Route path="/teste" element={<Teste />} />
-        </Routes>
-      </BrowserRouter>
-      <Toaster />
+              <Route path="/teste" element={<Teste />} />
+            </Routes>
+          </BrowserRouter>
+        <Toaster />
+      </TooltipProvider>
     </AuthProvider>
   )
 }
