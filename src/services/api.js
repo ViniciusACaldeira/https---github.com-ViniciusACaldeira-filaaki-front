@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_URL = "http://192.168.1.16:3000"
+import {API_URL} from '../config/env';
 
 export async function getFila(empresa, fila) {
   const res = await fetch(`${API_URL}/fila/${empresa}/${fila}`)

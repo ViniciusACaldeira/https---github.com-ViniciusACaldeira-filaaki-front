@@ -1,6 +1,7 @@
 import { io } from "socket.io-client"
+import {API_URL} from '../config/env';
 
-export const socket = io("http://192.168.1.16:3000", {
+export const socket = io(API_URL, {
   autoConnect: false,
   reconnection: true,
   reconnectionAttempts: 5
